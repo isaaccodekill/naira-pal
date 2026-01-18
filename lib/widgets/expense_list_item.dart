@@ -88,7 +88,7 @@ class ExpenseListItem extends ConsumerWidget {
             );
           },
           loading: () => const SizedBox(width: 44, height: 44),
-          error: (_, __) => const SizedBox(width: 44, height: 44),
+          error: (_, _) => const SizedBox(width: 44, height: 44),
         ),
         title: Text(
           '$currencySymbol${expense.amount.toStringAsFixed(2)}',
@@ -102,7 +102,7 @@ class ExpenseListItem extends ConsumerWidget {
             categoryAsync.when(
               data: (category) => Text(category?.name ?? 'Uncategorized'),
               loading: () => const Text('...'),
-              error: (_, __) => const Text('Unknown'),
+              error: (_, _) => const Text('Unknown'),
             ),
             if (expense.note != null && expense.note!.isNotEmpty)
               Text(
