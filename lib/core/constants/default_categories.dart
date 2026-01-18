@@ -42,7 +42,7 @@ class DefaultCategories {
     DefaultCategory(
       name: 'Health',
       icon: 'pill',
-      color: Color(0xFF9CAF91),
+      color: Color(0xFF7BA3D9),
     ),
     DefaultCategory(
       name: 'Education',
@@ -57,7 +57,7 @@ class DefaultCategories {
     DefaultCategory(
       name: 'Groceries',
       icon: 'shopping_cart',
-      color: Color(0xFFA8C97F),
+      color: Color(0xFFD4A574),
     ),
     DefaultCategory(
       name: 'Other',

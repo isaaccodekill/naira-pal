@@ -15,7 +15,7 @@ class AppColors {
 
   // Accent colors (same for both modes)
   static const primary = Color(0xFFD4847C);      // Coral
-  static const secondary = Color(0xFF9CAF91);    // Sage green
+  static const secondary = Color(0xFF9B7ED9);    // Muted purple
   static const warning = Color(0xFFE6A959);      // Amber
   static const error = Color(0xFFD4645C);
 
@@ -25,9 +25,9 @@ class AppColors {
   static const categoryShopping = Color(0xFF9B7ED9);
   static const categoryBills = Color(0xFF8B8B8B);
   static const categoryEntertainment = Color(0xFFE091B8);
-  static const categoryHealth = Color(0xFF9CAF91);
+  static const categoryHealth = Color(0xFF7BA3D9);    // Soft blue instead of green
   static const categoryEducation = Color(0xFF6BB5B5);
   static const categoryGifts = Color(0xFFE6A959);
-  static const categoryGroceries = Color(0xFFA8C97F);
+  static const categoryGroceries = Color(0xFFD4A574);  // Warm amber instead of green
   static const categoryOther = Color(0xFFA39E99);
 }
