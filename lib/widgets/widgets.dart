@@ -3,3 +3,4 @@ export 'category_chips.dart';
 export 'expense_pie_chart.dart';
 export 'category_spending_card.dart';
 export 'timeframe_selector.dart';
+export 'expense_list_item.dart';
