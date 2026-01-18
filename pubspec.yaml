@@ -1,0 +1,32 @@
+name: cash_book
+description: "NairaPal - Personal expense tracker"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.7
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  flutter_riverpod: ^2.4.9
+  drift: ^2.14.1
+  sqlite3_flutter_libs: ^0.5.18
+  path_provider: ^2.1.2
+  path: ^1.8.3
+  fl_chart: ^0.66.2
+  intl: ^0.19.0
+  flutter_animate: ^4.5.0
+  google_fonts: ^6.1.0
+  phosphor_flutter: ^2.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  drift_dev: ^2.14.1
+  build_runner: ^2.4.8
+
+flutter:
+  uses-material-design: true
