@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   // Light mode
-  static const backgroundLight = Color(0xFFFAF8F5);
+  static const backgroundLight = Color(0xFFFFFFFF);  // Pure white
   static const surfaceLight = Color(0xFFFFFFFF);
   static const textPrimaryLight = Color(0xFF2D2A26);
   static const textSecondaryLight = Color(0xFF6B6560);

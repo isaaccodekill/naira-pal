@@ -4,8 +4,10 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import 'core/theme/theme.dart';
+import 'providers/providers.dart';
 import 'screens/home/home_screen.dart';
 import 'screens/history/history_screen.dart';
+import 'screens/insights/insights_screen.dart';
 import 'screens/settings/settings_screen.dart';
 
 final selectedTabProvider = StateProvider<int>((ref) => 0);
@@ -45,6 +47,7 @@ class _MainShellState extends ConsumerState<_MainShell> {
   @override
   Widget build(BuildContext context) {
     final selectedTab = ref.watch(selectedTabProvider);
+    final accentColor = ref.watch(accentColorProvider);
 
     return Scaffold(
       body: PageView(
@@ -53,12 +56,14 @@ class _MainShellState extends ConsumerState<_MainShell> {
         children: const [
           HomeScreen(),
           HistoryScreen(),
+          InsightsScreen(),
           SettingsScreen(),
         ],
       ),
       extendBody: true,
       bottomNavigationBar: _FloatingNavBar(
         selectedIndex: selectedTab,
+        accentColor: accentColor,
         onTap: (index) {
           ref.read(selectedTabProvider.notifier).state = index;
           _pageController.animateToPage(
@@ -74,10 +79,12 @@ class _MainShellState extends ConsumerState<_MainShell> {
 
 class _FloatingNavBar extends StatelessWidget {
   final int selectedIndex;
+  final Color accentColor;
   final Function(int) onTap;
 
   const _FloatingNavBar({
     required this.selectedIndex,
+    required this.accentColor,
     required this.onTap,
   });
 
@@ -118,6 +125,7 @@ class _FloatingNavBar extends StatelessWidget {
               selectedIcon: PhosphorIcons.house(PhosphorIconsStyle.fill),
               label: 'Home',
               isSelected: selectedIndex == 0,
+              accentColor: accentColor,
               onTap: () => onTap(0),
             ),
             _NavItem(
@@ -125,14 +133,24 @@ class _FloatingNavBar extends StatelessWidget {
               selectedIcon: PhosphorIcons.clockCounterClockwise(PhosphorIconsStyle.fill),
               label: 'History',
               isSelected: selectedIndex == 1,
+              accentColor: accentColor,
               onTap: () => onTap(1),
+            ),
+            _NavItem(
+              icon: PhosphorIcons.chartBar(),
+              selectedIcon: PhosphorIcons.chartBar(PhosphorIconsStyle.fill),
+              label: 'Insights',
+              isSelected: selectedIndex == 2,
+              accentColor: accentColor,
+              onTap: () => onTap(2),
             ),
             _NavItem(
               icon: PhosphorIcons.gear(),
               selectedIcon: PhosphorIcons.gear(PhosphorIconsStyle.fill),
               label: 'Settings',
-              isSelected: selectedIndex == 2,
-              onTap: () => onTap(2),
+              isSelected: selectedIndex == 3,
+              accentColor: accentColor,
+              onTap: () => onTap(3),
             ),
           ],
         ),
@@ -146,6 +164,7 @@ class _NavItem extends StatelessWidget {
   final IconData selectedIcon;
   final String label;
   final bool isSelected;
+  final Color accentColor;
   final VoidCallback onTap;
 
   const _NavItem({
@@ -153,6 +172,7 @@ class _NavItem extends StatelessWidget {
     required this.selectedIcon,
     required this.label,
     required this.isSelected,
+    required this.accentColor,
     required this.onTap,
   });
 
@@ -172,7 +192,7 @@ class _NavItem extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           color: isSelected
-              ? AppColors.primary.withValues(alpha: 0.15)
+              ? accentColor.withValues(alpha: 0.15)
               : Colors.transparent,
           borderRadius: BorderRadius.circular(20),
         ),
@@ -185,7 +205,7 @@ class _NavItem extends StatelessWidget {
                 isSelected ? selectedIcon : icon,
                 key: ValueKey(isSelected),
                 color: isSelected
-                    ? AppColors.primary
+                    ? accentColor
                     : (isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight),
                 size: 24,
               ),
@@ -199,7 +219,7 @@ class _NavItem extends StatelessWidget {
                       child: Text(
                         label,
                         style: TextStyle(
-                          color: AppColors.primary,
+                          color: accentColor,
                           fontWeight: FontWeight.w600,
                           fontSize: 14,
                         ),

@@ -93,6 +93,47 @@ class SettingsScreen extends ConsumerWidget {
               ),
               const Divider(),
 
+              // Load Demo Data
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: Icon(PhosphorIcons.database()),
+                title: const Text('Load Demo Data'),
+                subtitle: const Text('Add sample expenses for testing'),
+                trailing: Icon(PhosphorIcons.caretRight()),
+                onTap: () async {
+                  final confirmed = await showDialog<bool>(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text('Load Demo Data?'),
+                      content: const Text(
+                        'This will add sample expenses to help you explore the app. Your existing data will not be deleted.',
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, false),
+                          child: const Text('Cancel'),
+                        ),
+                        FilledButton(
+                          onPressed: () => Navigator.pop(context, true),
+                          child: const Text('Load'),
+                        ),
+                      ],
+                    ),
+                  );
+
+                  if (confirmed == true) {
+                    final db = ref.read(databaseProvider);
+                    await db.seedSampleExpenses();
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Demo data loaded!')),
+                      );
+                    }
+                  }
+                },
+              ),
+              const Divider(),
+
               const SizedBox(height: 32),
               Center(
                 child: Text(

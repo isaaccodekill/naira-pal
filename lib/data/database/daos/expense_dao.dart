@@ -37,4 +37,14 @@ class ExpenseDao extends DatabaseAccessor<AppDatabase> with _$ExpenseDaoMixin {
   Future<int> deleteExpense(int id) {
     return (delete(expenses)..where((e) => e.id.equals(id))).go();
   }
+
+  /// Watch expenses for the last N months
+  Stream<List<Expense>> watchExpensesLastMonths(int months) {
+    final now = DateTime.now();
+    final start = DateTime(now.year, now.month - months + 1, 1);
+    return (select(expenses)
+          ..where((e) => e.createdAt.isBiggerOrEqualValue(start))
+          ..orderBy([(e) => OrderingTerm.desc(e.createdAt)]))
+        .watch();
+  }
 }
